@@ -1,6 +1,7 @@
 import bagel.*;
 import bagel.util.Point;
 import bagel.util.Side;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -129,6 +130,7 @@ public class ShadowPac extends AbstractGame  {
             font24.drawString(INSTRUCTION1, 320, 440);
             font24.drawString(INSTRUCTION2, 320, 470);
         }else if(start == true && score != target && lives.size() != 0){
+            // set up playground
             font20.drawString(SCORE, 25, 25);
             walls.forEach((p) -> WALL.drawFromTopLeft(p.x, p.y));
             dots.forEach((p) -> DOT.drawFromTopLeft(p.x, p.y));
@@ -164,7 +166,9 @@ public class ShadowPac extends AbstractGame  {
                     pacman.x = startPoint.x;;
                     pacman.y = startPoint.y;
                 }
-                if(pacman.collide(p, lastP, wall.recs) != Side.TOP){
+                if(pacman.collide(p, lastP, wall.recs) != Side.TOP
+                        && pacman.collide(p, lastP, wall.recs) != Side.LEFT
+                        && pacman.collide(p, lastP, wall.recs) != Side.RIGHT){
                     pacman.moveDown();
                 }
             }
@@ -178,7 +182,9 @@ public class ShadowPac extends AbstractGame  {
                     pacman.x = startPoint.x;;
                     pacman.y = startPoint.y;
                 }
-                if(pacman.collide(p, lastP, wall.recs) != Side.BOTTOM){
+                if(pacman.collide(p, lastP, wall.recs) != Side.BOTTOM
+                        && pacman.collide(p, lastP, wall.recs) != Side.LEFT
+                        && pacman.collide(p, lastP, wall.recs) != Side.RIGHT){
                     pacman.moveUp();
                 }
             }
@@ -192,7 +198,9 @@ public class ShadowPac extends AbstractGame  {
                     pacman.x = startPoint.x;;
                     pacman.y = startPoint.y;
                 }
-                if(pacman.collide(p, lastP, wall.recs) != Side.RIGHT){
+                if(pacman.collide(p, lastP, wall.recs) != Side.RIGHT
+                        && pacman.collide(p, lastP, wall.recs) != Side.TOP
+                        && pacman.collide(p, lastP, wall.recs) != Side.BOTTOM){
                     pacman.moveLeft();
                 }
             }
@@ -206,7 +214,9 @@ public class ShadowPac extends AbstractGame  {
                     pacman.x = startPoint.x;;
                     pacman.y = startPoint.y;
                 }
-                if(pacman.collide(p, lastP, wall.recs) != Side.LEFT){
+                if(pacman.collide(p, lastP, wall.recs) != Side.LEFT
+                        && pacman.collide(p, lastP, wall.recs) != Side.TOP
+                        && pacman.collide(p, lastP, wall.recs) != Side.BOTTOM){
                     pacman.moveRight();
                 }
             }
@@ -216,11 +226,9 @@ public class ShadowPac extends AbstractGame  {
             }
             font20.drawString(Integer.toString(score), 130, 25);
         }else if(score == target){
-            font64.drawString("WELL DONE!", 300, 360);
+            font64.drawString("WELL DONE!", 290, 380);
         }else if(lives.size() == 0){
-            font64.drawString("GAME OVER!", 300, 360);
+            font64.drawString("GAME OVER!", 290, 380);
         }
     }
-
 }
-
